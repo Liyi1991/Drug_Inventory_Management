@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans     
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd">
+  
+    <context:component-scan base-package="DBproject.controller" />
+    
+    <mvc:annotation-driven />
+    <mvc:default-servlet-handler />
+    <mvc:resources mapping="/resources/**" location="/resources/" /> 
+    
+    <!-- telling container to take care of annotations stuff -->
+    
+    <bean
+      class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix">
+        <value>/WEB-INF/views/</value>
+      </property>
+      <property name="suffix">
+        <value>.jsp</value>
+      </property>
+    </bean>
+    
+    <bean id="dataSource"
+       class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+ 
+      <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+      <property name="url" value="jdbc:mysql://localhost:3306/drugInventoryDB" />
+      <property name="username" value="root" />
+      <property name="password" value= "" />
+   </bean>
+   
+  <!-- declare beans -->
+ <bean id="Dao" class="DBproject.controller.DaoImpl" />
+  
+</beans>
